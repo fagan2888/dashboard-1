@@ -1,4 +1,4 @@
-import React from "react"
+import React, { ReactNode } from "react"
 
 import { Attributes } from "../../utils/transformDataAttributes"
 import { ChartMetadata } from "../../chart-types"
@@ -11,6 +11,7 @@ export type Props = {
   // warning! this is not the same as chartId in old dashboard
   // here, the chartID must be unique across all agents
   chartUuid: string
+  customElementForDygraph?: ReactNode
   portalNode: HTMLElement
   chartMetadata?: ChartMetadata | undefined
   dropdownMenu?: DropdownMenu
@@ -18,10 +19,11 @@ export type Props = {
 
 export const ChartContainer = ({
   attributes,
-  chartUuid,
-  portalNode,
   chartMetadata,
+  chartUuid,
+  customElementForDygraph,
   dropdownMenu,
+  portalNode,
 }: Props) => (
   <DisableOutOfView
     attributes={attributes}
@@ -31,9 +33,10 @@ export const ChartContainer = ({
     <ChartWithLoader
       attributes={attributes}
       chartUuid={chartUuid}
+      customElementForDygraph={customElementForDygraph}
       dropdownMenu={dropdownMenu}
-      portalNode={portalNode}
       externalChartMetadata={chartMetadata}
+      portalNode={portalNode}
     />
   </DisableOutOfView>
 )

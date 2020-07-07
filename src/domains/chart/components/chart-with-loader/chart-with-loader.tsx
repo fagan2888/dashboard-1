@@ -1,6 +1,6 @@
 import { cond, always, T } from "ramda"
 import axios from "axios"
-import React, { useEffect, useState, useMemo } from "react"
+import React, { ReactNode, useEffect, useState, useMemo } from "react"
 import { useThrottle, useUpdateEffect, useUnmount } from "react-use"
 
 import { AppStateT } from "store/app-state"
@@ -50,6 +50,7 @@ import "./chart-with-loader.css"
 export type Props = {
   attributes: Attributes
   chartUuid: string
+  customElementForDygraph?: ReactNode
   dropdownMenu?: DropdownMenu
   portalNode: HTMLElement
   externalChartMetadata?: ChartMetadata
@@ -58,6 +59,7 @@ export type Props = {
 export const ChartWithLoader = ({
   attributes,
   chartUuid,
+  customElementForDygraph,
   dropdownMenu,
   portalNode,
   externalChartMetadata,
@@ -321,6 +323,7 @@ export const ChartWithLoader = ({
           />
         </S.ChartDropdownContainer>
       )}
+      {customElementForDygraph}
     </>
   )
 }

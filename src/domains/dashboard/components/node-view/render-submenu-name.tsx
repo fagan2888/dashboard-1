@@ -1,4 +1,4 @@
-import React from "react"
+import React, { ReactNode } from "react"
 
 import { name2id } from "utils/name-2-id"
 import { Attributes } from "domains/chart/utils/transformDataAttributes"
@@ -32,8 +32,9 @@ const chartCommonMax = (family: string, context: string, units: string) => (
 )
 
 interface RenderSubmenuNameArg {
+  customElementForDygraph?: ReactNode
   duration: number
-  dropdownMenu: DropdownMenu
+  dropdownMenu?: DropdownMenu
   menu: Menu
   menuName: string
   pcentWidth: number
@@ -41,6 +42,7 @@ interface RenderSubmenuNameArg {
   chartsMetadata: ChartsMetadata
 }
 export const renderSubmenuName = ({
+  customElementForDygraph,
   duration,
   dropdownMenu,
   menu,
@@ -127,6 +129,7 @@ export const renderSubmenuName = ({
                 ...(commonMax ? { commonMax } : {}),
               }}
               chartMetadata={chartsMetadata.charts[chart.id]}
+              customElementForDygraph={customElementForDygraph}
               dropdownMenu={dropdownMenu}
             />
           </div>

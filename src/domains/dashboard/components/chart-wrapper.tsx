@@ -1,5 +1,5 @@
 import React, {
-  useState, useLayoutEffect, useMemo, useRef,
+  useState, useLayoutEffect, useMemo, useRef, ReactNode,
 } from "react"
 import uuid from "uuid"
 import { Attributes } from "domains/chart/utils/transformDataAttributes"
@@ -9,6 +9,7 @@ import { ChartMetadata } from "domains/chart/chart-types"
 
 interface Props {
   attributes: Attributes
+  customElementForDygraph?: ReactNode
   height?: number
   id?: string
   style?: React.CSSProperties
@@ -18,6 +19,7 @@ interface Props {
 
 export const ChartWrapper = ({
   attributes,
+  customElementForDygraph,
   dropdownMenu,
   id,
   style: styleOverride,
@@ -50,6 +52,7 @@ export const ChartWrapper = ({
           attributes={attributes}
           chartMetadata={chartMetadata}
           chartUuid={chartUuid}
+          customElementForDygraph={customElementForDygraph}
           dropdownMenu={dropdownMenu}
           portalNode={chartContainerElement}
         />

@@ -1,5 +1,5 @@
 import React, {
-  memo, useRef, useState, useEffect, useMemo,
+  memo, useRef, useState, useEffect, useMemo, ReactNode,
 } from "react"
 import { useWindowScroll } from "react-use"
 
@@ -26,8 +26,9 @@ const chartsPerRow = () => (
 
 
 interface SubSectionProps {
+  customElementForDygraph?: ReactNode
   duration: number
-  dropdownMenu: DropdownMenu
+  dropdownMenu?: DropdownMenu
   menu: Menu
   menuName: string
   pcentWidth: number
@@ -36,6 +37,7 @@ interface SubSectionProps {
   chartsMetadata: ChartsMetadata
 }
 const SubSection = memo(({
+  customElementForDygraph,
   duration,
   dropdownMenu,
   menu,
@@ -74,7 +76,14 @@ const SubSection = memo(({
         )}
       </div>
       {submenuNames.map(renderSubmenuName({
-        duration, dropdownMenu, menu, menuName, pcentWidth, host, chartsMetadata,
+        chartsMetadata,
+        customElementForDygraph,
+        duration,
+        dropdownMenu,
+        host,
+        menu,
+        menuName,
+        pcentWidth,
       }))}
     </div>
   )
@@ -86,7 +95,8 @@ const isSectionNodeVisible = (node: Element) => (node.getAttribute("id") as stri
 interface Props {
   chartsMetadata: ChartsMetadata
   currentChart: string
-  dropdownMenu: DropdownMenu
+  customElementForDygraph?: ReactNode
+  dropdownMenu?: DropdownMenu
   setCurrentChart: (currentChart: string) => void
   host?: string
   timeWindow?: number
@@ -94,6 +104,7 @@ interface Props {
 export const NodeView = ({
   chartsMetadata,
   currentChart,
+  customElementForDygraph,
   dropdownMenu,
   setCurrentChart,
   host = "http://localhost:19999",
@@ -150,6 +161,7 @@ export const NodeView = ({
                   </h1>
                 </div>
                 <SubSection
+                  customElementForDygraph={customElementForDygraph}
                   duration={duration}
                   dropdownMenu={dropdownMenu}
                   menu={menu}
